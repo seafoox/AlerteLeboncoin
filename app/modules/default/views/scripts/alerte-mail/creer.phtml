@@ -1,0 +1,30 @@
+<?php
+$this->title = 'Alerte Mail';
+$this->description = 'Créer une alerte mail à partir d\'une recherche leboncoin.fr.';
+?>
+<div class="left-column">
+    <h2 class="section">Création d'une alerte mail</h2>
+    
+    <?php if (isset($this->user)) : ?>
+    <p>Vous êtes actuellement connecté.</p>
+    <p><a href="<?php echo $this->url(array(
+        'action' => 'mes-alertes', 'controller' => 'compte', 'module' => 'api'
+    )); ?>">Rendez-vous dans votre espace pour gérer vos alertes</a></p>
+    <?php else : ?>
+    
+    <?php if ($this->valide) : ?>
+    <p>Votre alerte a été ajoutée.<br />Un lien de validation vous a été envoyé par mail.</p>
+    <?php else : ?>
+    <?php if (isset($this->error)) : ?>
+    <p style="color: #EF0000; font-weight: bold; text-align: center; margin: 0;"><?php echo $this->error; ?></p>
+    <?php endif; ?>
+    <?php echo $this->form; ?>
+    <?php endif; ?>
+    
+    <p style="font-size: .95em;">
+    	Les adresses mails fournies lors de la création des alertes mails ne seront utilisées
+    	que pour le service lui même. À tout moment, vous pouvez me contacter afin de supprimer toutes
+    	les alertes liées à votre mail (si vous ne possédez plus les clés).
+    </p>
+    <?php endif; ?>
+</div>

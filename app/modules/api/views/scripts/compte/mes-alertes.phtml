@@ -1,0 +1,105 @@
+<h2 class="section">Créer une alerte</h2>
+
+<?php if ($this->form->getValue('link')) : ?>
+<p style="color: #FF0000; margin: 0;">Pensez à terminer la création de l'alerte en cliquant sur le bouton « Créer l'alerte »</p>
+<?php endif; ?>
+<?php echo $this->form; ?>
+
+<?php if (count($this->alerts) > 0) : ?>
+<h2 class="section">Mes alertes mails</h2>
+<ul class="alerts">
+    <?php $i = 0; foreach ($this->alerts AS $alert) : ?>
+	<li class="alert<?php echo $i++ % 2 == 0?" left":""; ?>">
+    	<h3 title="<?php echo $this->escape($alert->title); ?>">
+    	    <?php echo $this->escape($alert->title); ?>
+    	</h3>
+        
+        <ul>
+        	<li><a href="<?php echo $this->escape($alert->link); ?>">Voir la recherche sur leboncoin.fr</a></li>
+        	<li>Créée le <?php echo $this->date($alert->date_created)->get(Zend_Date::DATE_MEDIUM); ?></li>
+        	<li>Dernière annonce le <?php echo $this->date($alert->date_updated)->get(Zend_Date::DATETIME_MEDIUM); ?></li>
+        	<li>
+    			<?php if ($alert->counter_alerts == 0) : ?>
+    			Aucune alerte n'a encore été envoyée.
+    			<?php elseif ($alert->counter_alerts == 1) : ?>
+    			<?php echo $alert->counter_ads; ?> annonce<?php echo $alert->counter_ads > 1?'s':''; ?>
+    			envoyée<?php echo $alert->counter_ads > 1?'s':''; ?> dans 1 alerte.
+    			<?php else : ?>
+    			<?php echo $alert->counter_ads; ?> annonces envoyées dans
+    			<?php echo $alert->counter_alerts; ?> alertes.
+    			<?php endif; ?>
+        	</li>
+        </ul>
+        
+        <?php if ($alert->stop) : ?>
+        <p><strong>Vous avez suspendu cette alerte.</strong></p>
+        <?php elseif (!$alert->validated): ?>
+        <p style="color: red; margin-right: 3px; margin-left: 3px;">Cette alerte est actuellement désactivée. Pour la réactiver, cliquez
+            <a href="<?php echo $this->url(array(
+            'controller' => 'alerte-mail', 'action' => 'reactiver',
+            'module' => 'default', 'key' => $alert->control_key), 'default', true); ?>">ici</a>.</p>
+        <?php else : ?>
+        <p style="font-size: 11px; text-align: left;"><strong>Vous avez choisie d'être averti toutes les
+        	<?php
+        	if ($alert->check_interval < 60) {
+        	    echo $alert->check_interval.' minutes';
+        	} elseif ($alert->check_interval == 60) {
+        	    echo 'heure';
+        	} else {
+        	    echo ($alert->check_interval/60).' heures';
+        	}
+        	?>
+        des nouvelles alertes.</strong></p>
+        <?php endif; ?>
+        
+        <div class="actions">
+        	<form action="<?php echo $this->url(array(
+        	    'action' => 'changer-intervalle', 'controller' => 'mes-alertes',
+        	    'module' => 'api', 'id' => $alert->id
+        	), 'default'); ?>" method="post" title="M'avertir toutes les …" class="form-interval">
+        		<div>
+                    <select name="interval">
+                        <option label="15 mins" value="15"<?php echo $alert->check_interval == 15?' selected="selected"':''; ?>>15 mins</option>
+                        <option label="30 mins" value="30"<?php echo $alert->check_interval == 30?' selected="selected"':''; ?>>30 mins</option>
+                        <option label="1 heure" value="60"<?php echo $alert->check_interval == 60?' selected="selected"':''; ?>>1 heure</option>
+                        <option label="2 heures" value="120"<?php echo $alert->check_interval == 120?' selected="selected"':''; ?>>2 heures</option>
+                        <option label="12 heures" value="720"<?php echo $alert->check_interval == 720?' selected="selected"':''; ?>>12 heures</option>
+                        <option label="24 heures" value="1440"<?php echo $alert->check_interval == 1440?' selected="selected"':''; ?>>24 heures</option>
+                    </select>
+                    <input type="submit" value="OK" />
+                </div>
+        	</form>
+        	<div class="buttons">
+                <a href="<?php echo $this->url(array(
+                    'action' => 'config', 'controller' => 'mes-alertes',
+                    'module' => 'api', 'id' => $alert->id
+                ), 'default'); ?>"
+                title="Configuration avancé de l'alerte."><img src="/images/icons/32x32/config.png" alt="" /></a>
+            	<?php if ($alert->stop) : ?>
+            	<a href="<?php echo $this->url(array(
+            	    'action' => 'reprendre', 'controller' => 'mes-alertes',
+            	    'module' => 'api', 'id' => $alert->id
+            	), 'default'); ?>"><img src="/images/icons/32x32/resume.png" alt="Rependre" title="Cliquer pour reprendre cette alerte" /></a>
+            	<?php else : ?>
+            	<a href="<?php echo $this->url(array(
+            	    'action' => 'suspendre', 'controller' => 'mes-alertes',
+            	    'module' => 'api', 'id' => $alert->id
+            	), 'default'); ?>"><img src="/images/icons/32x32/pause.png" alt="Suspendre" title="Cliquer pour suspendre cette alerte" /></a>
+            	<?php endif; ?>
+        		<a href="<?php echo $this->url(array(
+        		    'action' => 'creer', 'controller' => 'feed',
+        		    'module' => 'default'
+        		), 'default'); ?>?link=<?php echo $this->escape(base64_encode($alert->link)); ?>"
+        		title="Flux RSS de la recherche"><img src="/images/icons/32x32/rss.png" alt="" /></a>
+        		<a href="<?php echo $this->url(array(
+        		    'action' => 'supprimer', 'controller' => 'mes-alertes',
+        		    'module' => 'api', 'id' => $alert->id
+        		), 'default'); ?>"
+        		title="Supprimer cette alerte"><img src="/images/icons/32x32/remove.png" alt="" /></a>
+        	</div>
+        </div>
+    </li>
+    <?php endforeach; ?>
+</ul>
+
+<?php endif; ?>

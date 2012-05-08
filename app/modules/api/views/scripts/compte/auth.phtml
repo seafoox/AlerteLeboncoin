@@ -1,0 +1,15 @@
+<div class="login-registration">
+    <div class="login">
+    	<h2>Connexion</h2>
+        <?php echo $this->formLogin; ?>
+        <p style="text-align: right;"><a href="<?php echo $this->url(array(
+            'action' => 'mot-de-passe-oublie', 'controller' => 'compte',
+            'module' => 'api'
+        )); ?>">J'ai oublié mon mot de passe</a></p>
+    </div>
+    <div class="registration">
+    	<h2>Créer mon compte</h2>
+        <?php echo $this->formInscription; ?>
+    </div>
+    <span class="clear">&nbsp;</span>
+</div>

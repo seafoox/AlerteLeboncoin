@@ -1,0 +1,30 @@
+<?php $alert = $this->alert; ?>
+<h1>Supprimer cette alerte ?</h1>
+
+<h2 class="section"><?php echo $this->escape($alert->title); ?></h2>
+
+<ul>
+	<li><a href="<?php echo $this->escape($alert->link); ?>">Voir la recherche sur leboncoin.fr</a></li>
+	<li>Créée le <?php echo $this->date($alert->date_created)->get(Zend_Date::DATE_MEDIUM); ?></li>
+	<li>Dernière annonce le <?php echo $this->date($alert->date_updated)->get(Zend_Date::DATETIME_MEDIUM); ?></li>
+	<li>
+		<?php if ($alert->counter_alerts == 0) : ?>
+		Aucune alerte n'a encore été envoyée.
+		<?php elseif ($alert->counter_alerts == 1) : ?>
+		<?php echo $alert->counter_ads; ?> annonce<?php echo $alert->counter_ads > 1?'s':''; ?>
+		envoyée<?php echo $alert->counter_ads > 1?'s':''; ?> dans 1 alerte.
+		<?php else : ?>
+		<?php echo $alert->counter_ads; ?> annonces envoyées dans
+		<?php echo $alert->counter_alerts; ?> alertes.
+		<?php endif; ?>
+	</li>
+</ul>
+<form action="" method="post">
+	<p>
+		<input type="submit" value="Je confirme la suppression" style="font-weight: bold; cursor: pointer;" />
+		| <a href="<?php echo $this->url(array(
+    	    'action' => 'mes-alertes', 'controller' => 'compte',
+    	    'module' => 'api'
+    	), 'default'); ?>">annuler</a>
+	</p>
+</form>

@@ -1,0 +1,33 @@
+Publié le <strong><?php echo $this->ad->getDate(Zend_Date::DATETIME_MEDIUM); ?></strong>
+<br />
+<br />
+
+<strong>Nom</strong> : <?php echo $this->ad->getTitle(); ?>
+<?php if ($this->ad->getPrice()) : ?>
+&nbsp;&nbsp;&nbsp;&nbsp;<strong>Prix</strong> : <?php echo number_format($this->ad->getPrice(), 0, ',', ' '); ?> €
+<?php endif; ?>
+
+
+<?php if ($this->ad->getCategory()) : ?>
+<br />
+<strong>Catégorie</strong> : <?php echo $this->ad->getCategory(); ?>
+<?php endif; ?>
+<br />
+<?php if ($this->ad->getCounty()) : ?>
+<strong>Département</strong> : <?php echo $this->ad->getCounty(); ?>
+<?php endif; ?>
+<?php if ($this->ad->getCity()) : ?>
+&nbsp;&nbsp;&nbsp;&nbsp;<strong>Ville</strong> : <a href="http://maps.google.fr/?z=9&q=<?php
+    echo $this->escape($this->ad->getCounty().' '.$this->ad->getCity());
+?>" title="Localiser sur Google Map" target="_blank"><?php echo $this->ad->getCity(); ?></a>
+<?php endif; ?>
+<br />Annonce de <?php echo $this->ad->getProfessionnal()?'professionnel':'particulier.'; ?>
+<br />
+<?php if ($this->ad->getUrgent()) : ?>
+<strong style="color: #FF8900;">urgent</strong>
+<?php endif; ?>
+
+
+<?php if ($this->ad->getThumbnailLink()) : ?>
+<br /><img src="<?php echo str_replace('/thumbs/', '/images/', $this->ad->getThumbnailLink()); ?>" alt="" style="float: left; display: block;" />
+<?php endif; ?>

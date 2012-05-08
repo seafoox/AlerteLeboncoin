@@ -1,0 +1,7 @@
+<h2 class="section">M'envoyer un nouveau mot de passe</h2>
+
+<?php if (!$this->validate) : ?>
+<?php echo $this->form; ?>
+<?php else : ?>
+<p>Un nouveau mot de passe vous a été envoyé à « <?php echo $this->form->getValue('email'); ?> ».</p>
+<?php endif; ?>

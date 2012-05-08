@@ -1,0 +1,15 @@
+<?php
+$this->title = 'Alerte Mail - suppression';
+$this->description = 'Supprimer une alerte mail.';
+?>
+<div class="left-column">
+    <?php if ($this->alertMail) : ?>
+    <p>
+        L'alert suivante a été supprimée :
+        <br />
+        <a href="<?php echo $this->escape($this->alertMail->link); ?>"><?php echo $this->escape($this->alertMail->link); ?></a>
+    </p>
+    <?php else : ?>
+    <p>Clé invalide.</p>
+    <?php endif; ?>
+</div>

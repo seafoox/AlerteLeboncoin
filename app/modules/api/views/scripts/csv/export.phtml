@@ -1,0 +1,33 @@
+<?php if (isset($this->ads)) : ?>
+"ID","Date","Titre","Prix","Catégorie","Département","Ville","URL"
+<?php foreach ($this->ads AS $ad) : /* @var $ad Model_LeBonCoin_Ad */ ?>
+"<?php echo $ad->getId(); ?>","<?php
+    echo $ad->getDate()->get("dd/MM/YYYY HH:mm"); ?>","<?php
+    echo str_replace('"','""', $ad->getTitle()); ?>","<?php
+    echo $ad->getPrice(); ?>","<?php
+    echo str_replace('"','""', $ad->getCategory()); ?>","<?php
+    echo $ad->getCounty(); ?>","<?php
+    echo $ad->getCity(); ?>","<?php
+    echo $ad->getLink(); ?>"
+<?php endforeach; ?>
+<?php elseif(isset($this->link)): ?>
+<p>
+Téléchargement dans 3 secondes.<br />Si le téléchargement ne se lance pas automatiquement, vous pouvez
+cliquer sur ce <a href="<?php echo $this->url(array(
+    'action' => 'export', 'controller' => 'csv', 'module' => 'api',
+    'redirect' => 'ok'
+), 'default', true);  ?>?link=<?php echo $this->link; ?>">lien directe</a>.
+</p>
+<?php $this->headMeta()->appendHttpEquiv('Refresh', '3;URL='.$this->url(array(
+    'action' => 'export', 'controller' => 'csv', 'module' => 'api',
+    'redirect' => 'ok'
+), 'default', true).'?link='.$this->link); ?>
+<?php else: ?>
+<form action="" method="post">
+    <div>
+        <label>Adresse :</label>
+        <input type="text" name="link" value="" size="50" />
+        <input type="submit" value="OK" />
+    </div>
+</form>
+<?php endif; ?>

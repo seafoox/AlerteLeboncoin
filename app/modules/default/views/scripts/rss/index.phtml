@@ -1,0 +1,22 @@
+<?php $this->title = 'Flux RSS'; ?>
+<div class="left-column">
+    <h2 class="section">Création de flux RSS</h2>
+    <form action="" method="post">
+        <div>
+            <label for="link">Coller votre lien ici : </label>
+            <input id="link" type="text" name="link" value="<?php
+                echo isset($this->link)?$this->escape($this->link):""; ?>" />
+            <?php if (isset($this->errorUrl)) : ?>
+            <p style="color: red;"><?php echo $this->errorUrl; ?></p>
+            <?php endif; ?>
+            <input type="submit" value="Obtenir le flux RSS" />
+        </div>
+    </form>
+    <h2 class="section">Comment faire ?</h2>
+    <ul>
+        <li>sur <a href="http://www.leboncoin.fr" target="_blank">leboncoin.fr</a>, <strong>effectuez votre recherche</strong>.</li>
+        <li>lorsque votre recherche vous satisfait, <strong>copier le lien</strong> de votre barre d'adresse (http://www.lebon...).</li>
+        <li>dans le champs ci-dessus, <strong>collez le lien</strong>.</li>
+        <li>cliquez sur « <strong>Obtenir le flux RSS</strong> » afin d'obtenir le lien du flux.</li>
+    </ul>
+</div>

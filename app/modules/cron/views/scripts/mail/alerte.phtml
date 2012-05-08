@@ -1,0 +1,31 @@
+<h2>Alerte générée le <?php echo $this->currentDate->get(Zend_Date::DATETIME); ?></h2>
+
+<p style="font-size: 14px;">
+    <a href="<?php echo $this->escape($this->alert->link); ?>">[Adresse de recherche]</a>
+    <a href="http://<?php echo $_SERVER["HTTP_HOST"].$this->url(array(
+            'controller' => 'alerte-mail', 'action' => 'supprimer',
+            'module' => 'default', 'key' => $this->alert->control_key), 'default', true);
+    ?>" style="color: #FF0000;">[supprimer l'alerte]</a>
+    <a href="http://<?php echo $_SERVER["HTTP_HOST"].$this->url(array(
+            'action' => 'mes-alertes', 'controller' => 'compte',
+            'module' => 'api'), 'default', true);
+    ?>">[accéder à mon compte]</a>
+</p>
+
+<p>Liste des nouvelles annonces :</p>
+
+<hr /><br />
+<?php echo implode('<br /><hr /><br />', $this->newAds); ?>
+<br /><hr />
+
+<p style="font-size: 14px;">
+    <a href="<?php echo $this->escape($this->alert->link); ?>">[Adresse de recherche]</a>
+    <a href="http://<?php echo $_SERVER["HTTP_HOST"].$this->url(array(
+            'controller' => 'alerte-mail', 'action' => 'supprimer',
+            'module' => 'default', 'key' => $this->alert->control_key), 'default', true);
+    ?>" style="color: #FF0000;">[supprimer l'alerte]</a>
+    <a href="http://<?php echo $_SERVER["HTTP_HOST"].$this->url(array(
+            'action' => 'mes-alertes', 'controller' => 'compte',
+            'module' => 'api'), 'default', true);
+    ?>">[accéder à mon compte]</a>
+</p>

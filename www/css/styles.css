@@ -1,0 +1,463 @@
+@CHARSET "UTF-8";
+
+body {
+    padding: 0;
+    margin: 0;
+    background: #FAFAFA;
+    color: #444;
+    line-height: 1.25em;
+    font-size: .75em;
+    font-family: Arial;
+}
+
+h1 {
+    margin: 0 0 0 30px;
+    padding: 0;
+    color: #2163A4;
+    font-size: 2.5em;
+    line-height: .91em;
+}
+h2 {
+    font-size: 1.5em;
+    line-height: 1em;
+}
+h2.section {
+    border-bottom: 1px solid #BBBBBB;
+    color: #777777;
+}
+h3 {
+    font-size: 1.2em;
+    line-height: 1em;
+    font-weight: bold;
+}
+
+p {
+	font-size: 1.25em;
+    line-height: 1.25em;
+    text-align: justify;
+}
+
+a:link, a:active, a:hover, a:visited {
+    text-decoration: none;
+    color: #1d568f;
+}
+a:hover {
+    color: #2163A4;
+}
+a img {
+    border: none;
+    vertical-align: middle;
+}
+
+#header {
+    width: 898px;
+    height: 155px;
+    margin: 10px auto 0 auto;
+    position: relative;
+    z-index: 0;
+    border-left: 1px solid #888888;
+    border-right: 1px solid #888888;
+    color: #FFF;
+    overflow: hidden;
+}
+#header .content a:link, #header .content a:active, #header .content a:hover, #header .content a:visited {
+    color: #EEEEEE;
+}
+#header .content a:hover {
+    color: #FFFFFF;
+}
+#header h1 {
+    float: left;
+    padding: 20px 0;
+    color: #EEEEEE;
+    text-shadow: -1px -1px 2px #000000, 1px 1px 2px #000000;
+    opacity: .9;
+}
+#header h1 span {
+	display: block;
+	font-size: .4em;
+	letter-spacing: 2px;
+	margin-left: 5px;
+}
+div#header p.description {
+    margin: 10px 0 0 0;
+    width: 450px;
+    text-align: right;
+    float: right;
+}
+div#header div.content {
+    position: relative;
+    padding: 5px;
+    padding-bottom: 0;
+    height: 97px;
+    background: #000;
+    background: linear-gradient(bottom, rgb(11, 11, 11) 0%, rgb(102, 102, 102) 100%);
+}
+
+div#main-content {
+    width: 888px;
+    margin: 0 auto;
+    padding: 1px 5px;
+    border: 1px solid #888888;
+    border-top: none;
+    border-bottom: none;
+    background: #FFF;
+}
+div.left-column {
+    width: 600px;
+    float: left;
+}
+div.right-column {
+    width: 260px;
+    float: right;
+}
+
+div#footer {
+    background: #F0F0F0;
+    font-weight: bold;
+    text-align: right;
+    margin: 0 auto 3em auto;
+    padding: 5px;
+    width: 888px;
+    border: 1px solid #CCC;
+}
+
+ul#main-menu {
+    position: relative;
+    z-index: 1;
+    margin: 0;
+    padding: 0;
+    height: 48px;
+    overflow: visible;
+    background: #FAFAFA;
+    background: linear-gradient(bottom, rgb(221, 221, 221) 0%, rgb(250, 250, 250) 100%);
+    font-size: 1.333em;
+    box-shadow: 0 0 5px #333;
+    clear: both;
+}
+ul#main-menu li {
+    background: linear-gradient(bottom, rgb(221, 221, 221) 0%, rgb(250, 250, 250) 100%);
+    transition: background 500ms ease, height 500ms ease, margin-top 500ms ease, border-radius 500ms ease;
+    position: relative;
+    display: block;
+    float: left;
+    text-align: center;
+    border-right: 1px solid #DDD;
+    height: 48px;
+    border-radius: 0 0 0 0;
+}
+ul#main-menu li a {
+    display: block;
+    color: #333333;
+    padding: 16px 20px 0 20px;
+    font-weight: bold;
+    height: 32px;
+}
+ul#main-menu li:hover {
+    height: 54px;
+    margin-top: -6px;
+    border-radius: 5px 5px 0 0;
+}
+ul#main-menu li.active {
+    background: #DDDDDD;
+    background: linear-gradient(bottom, rgb(250, 250, 250) 0%, rgb(221, 221, 221) 100%);
+}
+ul#main-menu li.active {
+    height: 54px;
+    margin-top: -6px;
+    border-radius: 5px 5px 0 0;
+}
+ul#main-menu li.logout {
+    float: right;
+    margin-right: 0;
+}
+ul#main-menu li img {
+    display: block;
+}
+
+form.alert-mail {
+    margin: .5em auto;
+}
+form input#link {
+    width: 90%;
+    margin: 0;
+    padding: 0;
+    display: block;
+    font-weight: bold;
+}
+form input#link.link-alert {
+    width: auto;
+    display: inline;
+}
+form p.description {
+    margin: 0 0 .3em 0;
+}
+form label {
+    font-weight: bold;
+}
+form dt {
+    margin-top: 10px;
+}
+
+
+.clear {
+    clear: both;
+    display: block;
+    font-size: 1px;
+    height: 1px;
+    float: none;
+}
+
+
+/**
+ * Liste des alertes dans le compte
+ */
+ul.alerts {
+	margin: 0;
+	padding: 0;
+}
+ul.alerts li.alert {
+	position: relative;
+	list-style: none;
+	width: 427px;
+	height: 200px;
+	border: 1px solid #DDD;
+	float: left;
+	margin-left: 30px;
+	margin-bottom: 10px;
+}
+ul.alerts li.left {
+	clear: left;
+	margin-left: 0;
+}
+ul.alerts li.alert h3 {
+	background: #F0F0F0;
+	border-bottom: 1px solid #DDD;
+	margin: 0;
+	padding: 2px;
+	overflow: hidden;
+}
+ul.alerts li.alert h3 {
+	white-space: nowrap;
+	padding: 5px;
+	margin-bottom: 10px;
+}
+ul.alerts li.alert h3 a {
+	display: block;
+}
+ul.alerts li.alert .form-interval {
+	position: absolute;
+	bottom: 2px;
+	left: 2px;
+}
+ul.alerts li.alert div.buttons {
+	position: absolute;
+	bottom: 2px;
+	right: 2px;
+}
+
+
+
+
+div.box {
+    background: #FFF;
+    border: 1px solid #F0F0F0;
+    margin: 10px 0;
+}
+div.box .header {
+    border-bottom: 1px solid #AAA;
+    margin: 0;
+    padding: 0;
+    overflow: auto;
+}
+div.box .header img {
+    vertical-align: middle;
+}
+
+
+
+p.link {
+    font-weight: bold;
+    white-space: nowrap;
+    width: 100%;
+    overflow: auto;
+}
+div.link p {
+    margin: 0;
+}
+
+div.rss-content {
+    width: 800px;
+    overflow: auto;
+    height: 500px;
+}
+
+
+ul.actions {
+    margin: 15px 0 0 0;
+    padding: 0;
+}
+ul.actions li {
+    display: block;
+    width: 250px;
+    border: 1px solid #DDD;
+    text-align: left;
+    border-radius: 10px;
+    margin-bottom: 1em;
+    background: linear-gradient(bottom, rgb(221, 221, 221) 0%, rgb(250, 250, 250) 100%);
+    box-shadow: 0 0 3px 1px #E5E5E5;
+}
+ul.actions li:hover {
+    border: 1px solid #CCC;
+    background: linear-gradient(bottom, rgb(250, 250, 250) 0%, rgb(221, 221, 221) 100%);
+    box-shadow: 0 0 5px 1px #CCC;
+}
+ul.actions li.right {
+    margin-left: 15px;
+}
+ul.actions li h2 {
+    margin: 0;
+    padding: 5px 10px;
+    text-align: center;
+    font-size: 1.25em;
+}
+ul.actions li a {
+    display: block;
+    color: #333;
+    padding: 10px 5px;
+}
+ul.actions li a img {
+    vetical-align: middle;
+    opacity: .8;
+    display: none
+}
+ul.actions li a:hover img {
+    opacity: 1;
+}
+
+
+
+
+div.login-registration {
+    margin: 0 0 40px 0;
+}
+div.login, div.registration {
+    height: 360px;
+    background: #FFF;
+    padding: 0 20px;
+    border: 1px solid #DDD;
+    border-radius: 20px 0 0 20px;
+}
+div.login {
+    float: left;
+    width: 300px;
+    margin-left: 100px;
+    border-right: none;
+}
+div.registration {
+    background: #FFF;
+    border-radius: 0 20px 20px 0;
+    float: left;
+    width: 300px;
+    border-left: 1px dashed #565656;
+}
+div.login-registration h2 {
+    text-align: center;
+    text-transform: uppercase;
+}
+div.login dd {
+    text-align: right;
+}
+div.login-registration dd {
+    margin: 0;
+}
+div.login-registration input.text-field {
+    width: 230px;
+    padding: 1px 4px;
+    border: 1px solid #CCC;
+    border-radius: 5px;
+}
+ul.errors {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    margin-bottom: 10px;
+    color: #EE1717;
+}
+div.login #submit-element, div.login dt {
+    text-align: right;
+}
+form dd {
+    margin: 0;
+}
+
+
+
+div.alert div.actions {
+    text-align: right;
+    padding: 5px;
+}
+
+/**
+ * Form Alert Mail
+ */
+div.element input,
+form div.element input#link {
+    width: 100%;
+    display: block;
+}
+div#email-element, div#title-element {
+    float: left;
+    width: 45%;
+    padding: 10px;
+}
+div#title-element {
+    float: right;
+}
+div#link-element,
+div#register-element {
+    clear: both;
+    padding: 10px;
+}
+div#register-element input {
+    font-weight: bold;
+    padding: 10px;
+    display: block;
+    margin: 0 auto;
+    cursor: pointer;
+    letter-spacing: 2px;
+}
+
+form#morealertconfig fieldset {
+    margin-bottom: 20px;
+}
+form#morealertconfig #title-element {
+    float: none;
+    width: auto;
+    padding: 0;
+}
+form#morealertconfig div.element input {
+    width: auto;
+}
+#price_min-element, #price_max-element {
+    float: left;
+    margin-right: 5px;
+}
+#price_max-element {
+    border-left: 1px solid #999;
+    padding-left: 5px;
+}
+#cities-element label {
+    display: block;
+}
+#cities-element {
+    clear: both;
+    padding-top: 5px;
+}
+textarea#cities {
+    transition: height 500ms ease;
+    height: 50px;
+}
+textarea#cities:focus {
+    height: 300px;
+}

@@ -1,0 +1,9 @@
+<p><a href="<?php echo $this->url(array(
+    'action' => 'mes-alertes', 'controller' => 'compte',
+    'module' => 'api'
+), 'default'); ?>">&lt; retour</a></p>
+
+<?php if ($this->success): ?>
+<p style="color: green; font-weight: bold; padding-left: 20px;">Informations mises à jour.</p>
+<?php endif; ?>
+<?php echo $this->form; ?>

@@ -1,0 +1,9 @@
+AddType application/xml .rss
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresDefault "now"
+</IfModule>
+<IfModule mod_headers.c>
+    Header append Cache-Control "no-cache, must-revalidate"
+    Header set Pragma "no-cache"
+</IfModule> 

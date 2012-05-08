@@ -1,0 +1,12 @@
+<?php
+$this->title = 'Alerte Mail - validation';
+$this->description = 'Valider une alerte mail.';
+?>
+<div class="left-column">
+    <?php if (isset($this->alertMail)) : ?>
+    <p>Votre alerte a été validée.</p>
+    <p>Vous recevrez les alertes dans un interval de 30 minutes, si des annonces sont trouvés.</p>
+    <?php else : ?>
+    <p>Clé invalide.</p>
+    <?php endif; ?>
+</div>

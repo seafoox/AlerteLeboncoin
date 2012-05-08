@@ -1,0 +1,62 @@
+<?php if (empty($this->description)) $this->description = 'Suivre gratuitement et facilement les nouvelles annonces à partir d\'une recherche sur leboncoin.fr.'; ?>
+<?php echo $this->doctype() ?>
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <?php echo $this->headTitle(
+            (isset($this->title) && $this->requestController != "index"?$this->title.' | ':'').'Leboncoin : alerte mail et Flux RSS') ?>
+        <?php if (isset($this->description)) : ?>
+        <meta name="description" content="<?php echo $this->description; ?>" />
+        <?php endif; ?>
+        <?php
+        $this->headLink()->prependStylesheet('/css/'.APPLICATION_REV.'/styles.css', 'all,handheld');
+        echo $this->headLink().$this->headStyle();
+        ?>
+        <script src="/js/<?php echo APPLICATION_REV; ?>/prefixfree.min.js"></script>
+    </head>
+    <body>
+        <div id="header">
+            <div class="content">
+                <h1><a href="/">Alerte Leboncoin</a></h1>
+            </div>
+            <ul id="main-menu">
+                <li<?php echo $this->requestController == 'index'?' class="active"':''; ?>><a href="/">Accueil</a></li>
+                <li<?php echo $this->requestController == 'alerte-mail'?' class="active"':''; ?>><a href="<?php echo $this->url(array(
+                    'action' => 'creer', 'controller' => 'alerte-mail', 'module' => 'default'
+                ), 'default', true); ?>" title="Alerte Mail leboncoin">Alerte mail</a></li>
+                <li<?php echo $this->requestController == 'rss'?' class="active"':''; ?>><a href="<?php echo $this->url(array(
+                    'action' => 'index', 'controller' => 'rss', 'module' => 'default'
+                ), 'default', true); ?>" title="RSS leboncoin">Flux RSS</a></li>
+            </ul>
+        </div>
+        <div id="main-content">
+            <div class="right-column">
+                <ul class="actions">
+                    <li><h2>
+                        <a href="<?php echo $this->url(array(
+                            'action' => 'mes-alertes', 'controller' => 'compte', 'module' => 'api'
+                        ), 'default', true); ?>">
+                            <?php if (isset($this->user)) : ?>
+                            Mon compte
+                            <?php else : ?>
+                            Connexion / inscription
+                            <?php endif; ?></a>
+                    </h2></li>
+                    <li>
+                        <h2><a href="<?php echo $this->url(array(
+                            'action' => 'creer', 'controller' => 'alerte-mail', 'module' => 'default'
+                        ), 'default', true); ?>" title="Alerte mail leboncoin">Créer des alertes mails</a></h2>
+                    </li>
+                    <li>
+                        <h2><a href="<?php echo $this->url(array(
+                            'action' => 'index', 'controller' => 'rss', 'module' => 'default'
+                        ), 'default', true); ?>" title="RSS leboncoin">Générer des flux RSS</a></h2>
+                    </li>
+                </ul>
+            </div>
+            <?php echo $this->layout()->content ?>
+            <span class="clear">&nbsp;</span>
+        </div>
+        <?php echo $this->render('others/footer.phtml'); ?>
+    </body>
+</html>

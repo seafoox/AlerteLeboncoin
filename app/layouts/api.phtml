@@ -1,0 +1,51 @@
+<?php echo $this->doctype() ?>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <?php echo $this->headTitle((isset($this->title)?$this->title.' | ':'').'Alerte mail Leboncoin et Flux RSS Leboncoin') ?>
+        <?php if (isset($this->description)) : ?>
+        <meta name="description" content="<?php echo $this->description; ?>" />
+        <?php endif; ?>
+        <?php
+        $this->headLink()->prependStylesheet('/css/'.APPLICATION_REV.'/styles.css', 'all,handheld');
+        echo $this->headLink().$this->headStyle();
+        echo $this->headMeta();
+        ?>
+        <script src="/js/<?php echo APPLICATION_REV; ?>/prefixfree.min.js"></script>
+    </head>
+    <body>
+        <div id="header">
+            <div class="content">
+                <h1><a href="/">Alerte LeBonCoin - mon compte</a></h1>
+                <span class="clear">&nbsp;</span>
+            </div>
+        	<?php if (isset($this->user)) : ?>
+            <ul id="main-menu">
+                <li<?php echo $this->requestController == 'compte' && $this->requestAction == 'index'?
+                    ' class="active"':''; ?>><a href="<?php echo $this->url(array(
+                    'action' => 'index', 'controller' => 'compte', 'module' => 'api'
+                ), 'default'); ?>">Mon compte</a></li>
+                <li<?php echo $this->requestController == 'compte' && $this->requestAction == 'mes-alertes'?
+                    ' class="active"':''; ?>><a href="<?php echo $this->url(array(
+                    'action' => 'mes-alertes', 'controller' => 'compte', 'module' => 'api'
+                ), 'default'); ?>">Mes alertes mails</a></li>
+                <li<?php echo $this->requestController == 'csv'?' class="active"':''; ?>><a href="<?php echo $this->url(array(
+                    'action' => 'export', 'controller' => 'csv', 'module' => 'api'
+                ), 'default', true); ?>" title="Export CSV">Export CVS</a></li>
+                <li class="logout"><a href="<?php echo $this->url(array(
+                    'action' => 'deconnexion', 'controller' => 'compte', 'module' => 'api'
+                ), 'default'); ?>">Déconnexion</a></li>
+            </ul>
+            <?php endif; ?>
+        </div>
+        <div id="main-content">
+        	<?php if (Zend_Auth::getInstance()->hasIdentity()) : ?>
+        		<?php $user = Zend_Auth::getInstance()->getStorage()->read(); ?>
+        	<p style="text-align: right; font-weight: bold; margin: 0;"><?php echo $user->email; ?></p>
+        	<?php endif; ?>
+            <?php echo $this->layout()->content ?>
+            <span class="clear">&nbsp;</span>
+        </div>
+        <?php echo $this->render('others/footer.phtml'); ?>
+    </body>
+</html>

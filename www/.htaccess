@@ -1,0 +1,43 @@
+##################################
+### Interdiction des indexions ###
+##################################
+Options -Indexes
+
+
+#########################
+### MOD EXPIRE ###
+#########################
+Header unset ETag
+FileETag None
+<IfModule mod_expires.c>
+	# mise en cache des fichiers CSS et JavaScript
+    ExpiresActive on
+    ExpiresByType application/x-javascript "access plus 1 month"
+    ExpiresByType application/javascript "access plus 1 month"
+    ExpiresByType text/javascript "access plus 1 month"
+    ExpiresByType text/css "access plus 1 month"
+    #ExpiresByType application/rss+xml "access plus 5 minute"
+</IfModule>
+
+#########################
+### COMPRESSION GZIP ###
+#########################
+AddOutputFilterByType DEFLATE application/javascript application/x-javascript text/css text/html application/rss+xml
+
+
+RewriteEngine On
+RewriteBase /
+
+RewriteRule ^index\.php/(.+) /$1 [L,R=301]
+
+# redirection des ressources pour gestion du cache
+RewriteRule ^css/[.0-9]+/(.*)$ /css/$1 [L]
+RewriteRule ^js/[.0-9]+/(.*)$ ./js/$1 [L]
+
+# ne redirige pas les dossiers et fichiers symboliques
+RewriteCond %{REQUEST_FILENAME} -s [OR]
+RewriteCond %{REQUEST_FILENAME} -l [OR]
+RewriteCond %{REQUEST_FILENAME} -d
+RewriteRule .* - [NC,L]
+
+RewriteRule .* index.php [NC,L]
